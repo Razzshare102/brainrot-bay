@@ -1,22 +1,21 @@
 // Brainrot Bay — a 3D Steal-a-Brainrot game for roblox-brainrot-01 (Node 22,
-// standard library only). The game is this directory's Rojo project: eight
-// coloured bases ring a sand island, a conveyor belt carries brainrots across
-// it, and a tsunami sweeps the island every three minutes. Rebuild the place
-// with `rojo build default.project.json --output game.rbxl`, then hand it in:
-// this program copies game.rbxl, src/, screenshots/ and PLAY.json from beside
-// this file to /output and writes /output/dossier.json, the summary the judge
-// reads, with the vendored make.fun library.
+// standard library only). The game is this directory's Rojo project: build
+// it with `rojo build default.project.json --output game.rbxl`, then this
+// program hands it in. It copies game.rbxl, src/, screenshots/ and PLAY.json
+// from beside this file to /output and writes /output/dossier.json, the
+// summary the judge reads, with the vendored make.fun library.
 //
-// The first screenshot by name is the cover, and one of the screenshots is
-// the thumbnail uploaded for the game on Roblox. PLAY.json names the published
-// place once the experience is public; until then it holds the starter's
-// zeros and the kit's check refuses the entry (as it should).
+// The game: a sandy island ringed by eight coloured bases, a conveyor belt
+// down the middle that spawns brainrot characters, and a tsunami that sweeps
+// the island every three minutes. Buy brainrots off the belt (E), earn money
+// every second, steal from rivals, slap them back (Q), lock your base (F),
+// spend in the shop, and rebirth for +25% income.
 //
 // Every name under /output starts with a letter, a digit or _ and holds only
 // letters, digits, . _ and -: the grader fails an entry whose output holds
-// any other, so a file such as .gitkeep or .DS_Store copied in fails it. So
-// src/ and screenshots/ are copied without any name that starts with a dot,
-// at any depth.
+// any other, so a file such as .gitkeep or .DS_Store copied in fails it.
+// So src/ and screenshots/ are copied without any name that starts with a
+// dot, at any depth.
 //
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts

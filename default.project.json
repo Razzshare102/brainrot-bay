@@ -2,522 +2,151 @@
   "name": "brainrot-bay",
   "tree": {
     "$className": "DataModel",
-    "Players": {
-      "$properties": {
-        "CharacterAutoLoads": true
-      }
-    },
-    "ReplicatedStorage": {
-      "Shared": {
-        "$path": "src/shared"
-      }
-    },
-    "ServerScriptService": {
-      "Server": {
-        "$path": "src/server"
-      }
-    },
-    "StarterPlayer": {
-      "StarterPlayerScripts": {
-        "Client": {
-          "$path": "src/client"
-        }
-      }
-    },
-    "Lighting": {
-      "$properties": {
-        "Ambient": [
-          0.2,
-          0.2,
-          0.25
-        ],
-        "Brightness": 2.5,
-        "ClockTime": 14,
-        "FogColor": [
-          0.7,
-          0.85,
-          1
-        ],
-        "FogEnd": 600,
-        "FogStart": 150,
-        "GeographicLatitude": 20,
-        "GlobalShadows": true,
-        "Outlines": false,
-        "Technology": "Voxel"
-      }
-    },
-    "SoundService": {
-      "$properties": {
-        "RespectFilteringEnabled": true
-      }
-    },
+    "Players": { "$properties": { "CharacterAutoLoads": true } },
+    "ReplicatedStorage": { "Shared": { "$path": "src/shared" } },
+    "ServerScriptService": { "Server": { "$path": "src/server" } },
+    "StarterPlayer": { "StarterPlayerScripts": { "Client": { "$path": "src/client" } } },
     "Workspace": {
-      "$properties": {
-        "FilteringEnabled": true
-      },
-      "Baseplate": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [
-            0.38823,
-            0.37254,
-            0.38823
-          ],
-          "Locked": true,
-          "Position": [
-            0,
-            -10,
-            0
-          ],
-          "Size": [
-            512,
-            20,
-            512
-          ]
-        }
-      },
-      "SandIsland": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [
-            0.96,
-            0.87,
-            0.62
-          ],
-          "Material": "Sand",
-          "Position": [
-            0,
-            -2,
-            0
-          ],
-          "Size": [
-            200,
-            4,
-            200
-          ]
-        }
-      },
-      "SeaWater": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "CanCollide": false,
-          "Color": [
-            0.15,
-            0.5,
-            0.9
-          ],
-          "Material": "SmoothPlastic",
-          "Position": [
-            0,
-            -3.5,
-            0
-          ],
-          "Size": [
-            400,
-            1,
-            400
-          ],
-          "Transparency": 0.3
-        }
-      },
-      "BeltBed": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [
-            0.15,
-            0.15,
-            0.18
-          ],
-          "Material": "Slate",
-          "Position": [
-            0,
-            2.5,
-            0
-          ],
-          "Size": [
-            140,
-            1,
-            8
-          ]
-        }
-      },
-      "BeltRailNorth": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [
-            0.9,
-            0.75,
-            0.2
-          ],
-          "Material": "SmoothPlastic",
-          "Position": [
-            0,
-            3.2,
-            4.5
-          ],
-          "Size": [
-            140,
-            1,
-            1
-          ]
-        }
-      },
-      "BeltRailSouth": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [
-            0.9,
-            0.75,
-            0.2
-          ],
-          "Material": "SmoothPlastic",
-          "Position": [
-            0,
-            3.2,
-            -4.5
-          ],
-          "Size": [
-            140,
-            1,
-            1
-          ]
-        }
-      },
-      "BeltStripe1": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [-63, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe2": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [-49, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe3": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [-35, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe4": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [-21, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe5": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [-7, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe6": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [7, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe7": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [21, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe8": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [35, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe9": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [49, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "BeltStripe10": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.9, 0.9, 0.9],
-          "Position": [63, 3.1, 0],
-          "Size": [1, 0.2, 8]
-        }
-      },
-      "ArchPostNorth": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.2, 0.6, 1],
-          "Material": "Neon",
-          "Position": [-70, 6, 4],
-          "Size": [1, 6, 1]
-        }
-      },
-      "ArchPostSouth": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.2, 0.6, 1],
-          "Material": "Neon",
-          "Position": [-70, 6, -4],
-          "Size": [1, 6, 1]
-        }
-      },
-      "ArchBar": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.2, 0.6, 1],
-          "Material": "Neon",
-          "Position": [-70, 9, 0],
-          "Size": [1, 1, 9]
-        }
-      },
-      "GatePostNorth": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [1, 0.3, 0.3],
-          "Material": "Neon",
-          "Position": [70, 6, 4],
-          "Size": [1, 6, 1]
-        }
-      },
-      "GatePostSouth": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [1, 0.3, 0.3],
-          "Material": "Neon",
-          "Position": [70, 6, -4],
-          "Size": [1, 6, 1]
-        }
-      },
-      "GateBar": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [1, 0.3, 0.3],
-          "Material": "Neon",
-          "Position": [70, 9, 0],
-          "Size": [1, 1, 9]
-        }
-      },
-      "BeltLeg1": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.4, 0.4, 0.45],
-          "Position": [-50, 1.25, 3],
-          "Size": [2, 2.5, 2]
-        }
-      },
-      "BeltLeg2": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.4, 0.4, 0.45],
-          "Position": [-50, 1.25, -3],
-          "Size": [2, 2.5, 2]
-        }
-      },
-      "BeltLeg3": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.4, 0.4, 0.45],
-          "Position": [50, 1.25, 3],
-          "Size": [2, 2.5, 2]
-        }
-      },
-      "BeltLeg4": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.4, 0.4, 0.45],
-          "Position": [50, 1.25, -3],
-          "Size": [2, 2.5, 2]
-        }
-      },
-      "BaseCoral": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.431, 0.431], "Material": "SmoothPlastic", "Position": [55, 0.5, 0], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.26, 0.26], "Material": "SmoothPlastic", "Position": [62.5, 4, 0], "Size": [1, 6, 16] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [62.5, 3.5, -7], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [62.5, 3.5, 7], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [62.5, 5, 7], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.431, 0.431], "Material": "Neon", "Position": [62.5, 9.5, 7], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "BaseSunny": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.824, 0.275], "Material": "SmoothPlastic", "Position": [38.9, 0.5, 38.9], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.49, 0.16], "Material": "SmoothPlastic", "Position": [44.2, 4, 44.2], "Size": [16, 6, 1] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [49.1, 3.5, 39.3], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [39.3, 3.5, 49.1], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [39.3, 5, 49.1], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.824, 0.275], "Material": "Neon", "Position": [39.3, 9.5, 49.1], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "BaseLime": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.549, 0.863, 0.353], "Material": "SmoothPlastic", "Position": [0, 0.5, 55], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.33, 0.52, 0.21], "Material": "SmoothPlastic", "Position": [0, 4, 62.5], "Size": [16, 6, 1] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [7, 3.5, 62.5], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-7, 3.5, 62.5], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [-7, 5, 62.5], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.549, 0.863, 0.353], "Material": "Neon", "Position": [-7, 9.5, 62.5], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "BaseAqua": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.275, 0.784, 0.863], "Material": "SmoothPlastic", "Position": [-38.9, 0.5, 38.9], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.16, 0.47, 0.52], "Material": "SmoothPlastic", "Position": [-44.2, 4, 44.2], "Size": [16, 6, 1] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-39.3, 3.5, 49.1], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-49.1, 3.5, 39.3], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [-49.1, 5, 39.3], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.275, 0.784, 0.863], "Material": "Neon", "Position": [-49.1, 9.5, 39.3], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "BaseBerry": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.745, 0.392, 1], "Material": "SmoothPlastic", "Position": [-55, 0.5, 0], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.45, 0.24, 0.6], "Material": "SmoothPlastic", "Position": [-62.5, 4, 0], "Size": [1, 6, 16] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-62.5, 3.5, 7], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-62.5, 3.5, -7], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [-62.5, 5, -7], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.745, 0.392, 1], "Material": "Neon", "Position": [-62.5, 9.5, -7], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "BaseBubblegum": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.51, 0.784], "Material": "SmoothPlastic", "Position": [-38.9, 0.5, -38.9], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.31, 0.47], "Material": "SmoothPlastic", "Position": [-44.2, 4, -44.2], "Size": [16, 6, 1] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-49.1, 3.5, -39.3], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-39.3, 3.5, -49.1], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [-39.3, 5, -49.1], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.51, 0.784], "Material": "Neon", "Position": [-39.3, 9.5, -49.1], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "BaseTangerine": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.588, 0.196], "Material": "SmoothPlastic", "Position": [0, 0.5, -55], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.35, 0.12], "Material": "SmoothPlastic", "Position": [0, 4, -62.5], "Size": [16, 6, 1] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [-7, 3.5, -62.5], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [7, 3.5, -62.5], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [7, 5, -62.5], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.588, 0.196], "Material": "Neon", "Position": [7, 9.5, -62.5], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "BaseMint": {
-        "$className": "Folder",
-        "Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.353, 0.902, 0.706], "Material": "SmoothPlastic", "Position": [38.9, 0.5, -38.9], "Size": [16, 1, 16] } },
-        "Wall": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.21, 0.54, 0.42], "Material": "SmoothPlastic", "Position": [44.2, 4, -44.2], "Size": [16, 6, 1] } },
-        "PostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [39.3, 3.5, -49.1], "Size": [1, 5, 1] } },
-        "PostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.9, 0.9], "Position": [49.1, 3.5, -39.3], "Size": [1, 5, 1] } },
-        "Pole": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Position": [49.1, 5, -39.3], "Size": [1, 8, 1] } },
-        "FlagOrb": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.353, 0.902, 0.706], "Material": "Neon", "Position": [49.1, 9.5, -39.3], "Shape": "Ball", "Size": [2.5, 2.5, 2.5] } }
-      },
-      "Palm1Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.38, 0.2], "Material": "Wood", "Position": [38.8, 4, 16.1], "Size": [2, 8, 2] } },
-      "Palm1Top": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.2, 0.7, 0.3], "Material": "SmoothPlastic", "Position": [38.8, 10, 16.1], "Shape": "Ball", "Size": [7, 7, 7] } },
-      "Palm1Crown": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.75, 0.35], "Material": "SmoothPlastic", "Position": [40.3, 13, 16.1], "Shape": "Ball", "Size": [5, 5, 5] } },
-      "Palm2Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.38, 0.2], "Material": "Wood", "Position": [-16.1, 4, 38.8], "Size": [2, 8, 2] } },
-      "Palm2Top": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.2, 0.7, 0.3], "Material": "SmoothPlastic", "Position": [-16.1, 10, 38.8], "Shape": "Ball", "Size": [7, 7, 7] } },
-      "Palm2Crown": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.75, 0.35], "Material": "SmoothPlastic", "Position": [-14.6, 13, 38.8], "Shape": "Ball", "Size": [5, 5, 5] } },
-      "Palm3Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.38, 0.2], "Material": "Wood", "Position": [-38.8, 4, -16.1], "Size": [2, 8, 2] } },
-      "Palm3Top": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.2, 0.7, 0.3], "Material": "SmoothPlastic", "Position": [-38.8, 10, -16.1], "Shape": "Ball", "Size": [7, 7, 7] } },
-      "Palm3Crown": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.75, 0.35], "Material": "SmoothPlastic", "Position": [-37.3, 13, -16.1], "Shape": "Ball", "Size": [5, 5, 5] } },
-      "Palm4Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.38, 0.2], "Material": "Wood", "Position": [16.1, 4, -38.8], "Size": [2, 8, 2] } },
-      "Palm4Top": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.2, 0.7, 0.3], "Material": "SmoothPlastic", "Position": [16.1, 10, -38.8], "Shape": "Ball", "Size": [7, 7, 7] } },
-      "Palm4Crown": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.75, 0.35], "Material": "SmoothPlastic", "Position": [17.6, 13, -38.8], "Shape": "Ball", "Size": [5, 5, 5] } },
-      "Rock1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.55, 0.6], "Material": "Slate", "Position": [20, 1.5, -20], "Shape": "Ball", "Size": [3, 3, 3] } },
-      "Rock2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.55, 0.6], "Material": "Slate", "Position": [-20, 2, 20], "Shape": "Ball", "Size": [4, 4, 4] } },
-      "Rock3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.55, 0.6], "Material": "Slate", "Position": [45, 1.75, -20], "Shape": "Ball", "Size": [3.5, 3.5, 3.5] } },
-      "Rock4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.55, 0.6], "Material": "Slate", "Position": [-45, 1.5, 20], "Shape": "Ball", "Size": [3, 3, 3] } },
-      "Rock5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.55, 0.6], "Material": "Slate", "Position": [15, 2, 45], "Shape": "Ball", "Size": [4, 4, 4] } },
-      "Rock6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.55, 0.6], "Material": "Slate", "Position": [-15, 1.75, -45], "Shape": "Ball", "Size": [3.5, 3.5, 3.5] } },
-      "TowerBase": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.5, 0.5, 0.55],
-          "Position": [0, 0.5, -30],
-          "Size": [6, 1, 6]
-        }
-      },
-      "TowerPole": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.85, 0.85, 0.9],
-          "Position": [0, 8, -30],
-          "Size": [2, 14, 2]
-        }
-      },
-      "TowerLight": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "Color": [0.31, 1, 0.47],
-          "Material": "SmoothPlastic",
-          "Position": [0, 16, -30],
-          "Shape": "Ball",
-          "Size": [3, 3, 3]
-        }
-      },
-      "TsunamiWave": {
-        "$className": "Part",
-        "$properties": {
-          "Anchored": true,
-          "CanCollide": false,
-          "Color": [0.1, 0.4, 0.9],
-          "Material": "SmoothPlastic",
-          "Position": [-110, 6, 0],
-          "Size": [10, 12, 220],
-          "Transparency": 1
-        }
-      },
-      "SpawnLocation": {
-        "$className": "SpawnLocation",
-        "$properties": {
-          "AllowTeamChangeOnTouch": false,
-          "Anchored": true,
-          "Color": [0.5, 0.8, 0.5],
-          "Duration": 0,
-          "Neutral": true,
-          "Position": [0, 0.5, 78],
-          "Size": [8, 1, 8]
-        }
-      }
-    }
+      "$properties": { "FilteringEnabled": true },
+      "Baseplate": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.38823, 0.37254, 0.38823], "Locked": true, "Position": [0, -10, 0], "Size": [512, 20, 512] } },
+      "Water": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.1, 0.45, 0.85], "Locked": true, "Material": "SmoothPlastic", "Position": [0, -0.5, 0], "Size": [400, 1, 400], "Transparency": 0.25 } },
+      "Island": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.96, 0.82, 0.55], "Locked": true, "Material": "SmoothPlastic", "Position": [0, 1, 0], "Size": [130, 2, 130] } },
+      "Plaza": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.75, 0.75, 0.72], "Locked": true, "Material": "SmoothPlastic", "Position": [0, 2.2, 0], "Size": [30, 0.4, 30] } },
+      "SpawnPoint": { "$className": "SpawnLocation", "$properties": { "Anchored": true, "Color": [0.2, 0.8, 0.3], "Duration": 0, "Enabled": true, "Locked": true, "Neutral": true, "Position": [0, 2.9, 0], "Size": [10, 1, 10] } },
+      "BeltBase": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.2, 0.2, 0.22], "Locked": true, "Material": "SmoothPlastic", "Position": [0, 2.5, -20], "Size": [8, 1, 50] } },
+      "BeltRailL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.85, 0.1], "Locked": true, "Material": "Neon", "Position": [-4.25, 3.4, -20], "Size": [0.5, 1.2, 50] } },
+      "BeltRailR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.85, 0.1], "Locked": true, "Material": "Neon", "Position": [4.25, 3.4, -20], "Size": [0.5, 1.2, 50] } },
+      "Roller1": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -42], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller2": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -37], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller3": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -32], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller4": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -27], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller5": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -22], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller6": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -17], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller7": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -12], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller8": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -7], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller9": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, -2], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "Roller10": { "$className": "Part", "$properties": { "Anchored": true, "CanCollide": false, "Color": [0.55, 0.55, 0.58], "Locked": true, "Position": [0, 3.15, 3], "Shape": "Cylinder", "Size": [7.6, 1, 1] } },
+      "GatePostL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.3, 0.3], "Locked": true, "Position": [-4.5, 5, -45], "Size": [1, 5, 1] } },
+      "GatePostR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.3, 0.3], "Locked": true, "Position": [4.5, 5, -45], "Size": [1, 5, 1] } },
+      "GateBeam": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.9, 0.3, 0.3], "Locked": true, "Material": "Neon", "Position": [0, 7.2, -45], "Size": [10, 1, 1] } },
+      "Base1Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.15, 0.15], "Locked": true, "Position": [0, 2.5, -48], "Size": [14, 1, 14] } },
+      "Base1Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.15, 0.15], "Locked": true, "Orientation": [0, 0, 0], "Position": [0, 5.5, -55], "Size": [14, 7, 1] } },
+      "Base1WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.15, 0.15], "Locked": true, "Orientation": [0, 0, 0], "Position": [7, 5.5, -48], "Size": [1, 7, 14] } },
+      "Base1WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.15, 0.15], "Locked": true, "Orientation": [0, 0, 0], "Position": [-7, 5.5, -48], "Size": [1, 7, 14] } },
+      "Base1Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-4, 3.2, -45], "Size": [3, 0.4, 3] } },
+      "Base1Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [0, 3.2, -45], "Size": [3, 0.4, 3] } },
+      "Base1Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [4, 3.2, -45], "Size": [3, 0.4, 3] } },
+      "Base1Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-4, 3.2, -51], "Size": [3, 0.4, 3] } },
+      "Base1Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [0, 3.2, -51], "Size": [3, 0.4, 3] } },
+      "Base1Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [4, 3.2, -51], "Size": [3, 0.4, 3] } },
+      "Base2Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.4, 1], "Locked": true, "Position": [33.94, 2.5, -33.94], "Size": [14, 1, 14] } },
+      "Base2Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.4, 1], "Locked": true, "Orientation": [0, 45, 0], "Position": [38.89, 5.5, -38.89], "Size": [14, 7, 1] } },
+      "Base2WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.4, 1], "Locked": true, "Orientation": [0, 45, 0], "Position": [38.89, 5.5, -28.99], "Size": [1, 7, 14] } },
+      "Base2WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.4, 1], "Locked": true, "Orientation": [0, 45, 0], "Position": [28.99, 5.5, -38.89], "Size": [1, 7, 14] } },
+      "Base2Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [28.99, 3.2, -34.65], "Size": [3, 0.4, 3] } },
+      "Base2Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [31.82, 3.2, -31.82], "Size": [3, 0.4, 3] } },
+      "Base2Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [34.65, 3.2, -28.99], "Size": [3, 0.4, 3] } },
+      "Base2Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [33.23, 3.2, -38.89], "Size": [3, 0.4, 3] } },
+      "Base2Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [36.06, 3.2, -36.06], "Size": [3, 0.4, 3] } },
+      "Base2Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [38.89, 3.2, -33.23], "Size": [3, 0.4, 3] } },
+      "Base3Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.85, 0.25], "Locked": true, "Position": [48, 2.5, 0], "Size": [14, 1, 14] } },
+      "Base3Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.85, 0.25], "Locked": true, "Orientation": [0, 90, 0], "Position": [55, 5.5, 0], "Size": [14, 7, 1] } },
+      "Base3WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.85, 0.25], "Locked": true, "Orientation": [0, 90, 0], "Position": [48, 5.5, 7], "Size": [1, 7, 14] } },
+      "Base3WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.85, 0.25], "Locked": true, "Orientation": [0, 90, 0], "Position": [48, 5.5, -7], "Size": [1, 7, 14] } },
+      "Base3Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [45, 3.2, -4], "Size": [3, 0.4, 3] } },
+      "Base3Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [45, 3.2, 0], "Size": [3, 0.4, 3] } },
+      "Base3Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [45, 3.2, 4], "Size": [3, 0.4, 3] } },
+      "Base3Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [51, 3.2, -4], "Size": [3, 0.4, 3] } },
+      "Base3Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [51, 3.2, 0], "Size": [3, 0.4, 3] } },
+      "Base3Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [51, 3.2, 4], "Size": [3, 0.4, 3] } },
+      "Base4Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.85, 0.1], "Locked": true, "Position": [33.94, 2.5, 33.94], "Size": [14, 1, 14] } },
+      "Base4Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.85, 0.1], "Locked": true, "Orientation": [0, 135, 0], "Position": [38.89, 5.5, 38.89], "Size": [14, 7, 1] } },
+      "Base4WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.85, 0.1], "Locked": true, "Orientation": [0, 135, 0], "Position": [28.99, 5.5, 38.89], "Size": [1, 7, 14] } },
+      "Base4WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.85, 0.1], "Locked": true, "Orientation": [0, 135, 0], "Position": [38.89, 5.5, 28.99], "Size": [1, 7, 14] } },
+      "Base4Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [34.65, 3.2, 28.99], "Size": [3, 0.4, 3] } },
+      "Base4Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [31.82, 3.2, 31.82], "Size": [3, 0.4, 3] } },
+      "Base4Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [28.99, 3.2, 34.65], "Size": [3, 0.4, 3] } },
+      "Base4Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [38.89, 3.2, 33.23], "Size": [3, 0.4, 3] } },
+      "Base4Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [36.06, 3.2, 36.06], "Size": [3, 0.4, 3] } },
+      "Base4Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [33.23, 3.2, 38.89], "Size": [3, 0.4, 3] } },
+      "Base5Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.25, 0.9], "Locked": true, "Position": [0, 2.5, 48], "Size": [14, 1, 14] } },
+      "Base5Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.25, 0.9], "Locked": true, "Orientation": [0, 180, 0], "Position": [0, 5.5, 55], "Size": [14, 7, 1] } },
+      "Base5WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.25, 0.9], "Locked": true, "Orientation": [0, 180, 0], "Position": [-7, 5.5, 48], "Size": [1, 7, 14] } },
+      "Base5WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.6, 0.25, 0.9], "Locked": true, "Orientation": [0, 180, 0], "Position": [7, 5.5, 48], "Size": [1, 7, 14] } },
+      "Base5Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [4, 3.2, 45], "Size": [3, 0.4, 3] } },
+      "Base5Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [0, 3.2, 45], "Size": [3, 0.4, 3] } },
+      "Base5Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-4, 3.2, 45], "Size": [3, 0.4, 3] } },
+      "Base5Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [4, 3.2, 51], "Size": [3, 0.4, 3] } },
+      "Base5Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [0, 3.2, 51], "Size": [3, 0.4, 3] } },
+      "Base5Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-4, 3.2, 51], "Size": [3, 0.4, 3] } },
+      "Base6Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.55, 0.1], "Locked": true, "Position": [-33.94, 2.5, 33.94], "Size": [14, 1, 14] } },
+      "Base6Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.55, 0.1], "Locked": true, "Orientation": [0, 225, 0], "Position": [-38.89, 5.5, 38.89], "Size": [14, 7, 1] } },
+      "Base6WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.55, 0.1], "Locked": true, "Orientation": [0, 225, 0], "Position": [-38.89, 5.5, 28.99], "Size": [1, 7, 14] } },
+      "Base6WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.55, 0.1], "Locked": true, "Orientation": [0, 225, 0], "Position": [-28.99, 5.5, 38.89], "Size": [1, 7, 14] } },
+      "Base6Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-28.99, 3.2, 34.65], "Size": [3, 0.4, 3] } },
+      "Base6Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-31.82, 3.2, 31.82], "Size": [3, 0.4, 3] } },
+      "Base6Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-34.65, 3.2, 28.99], "Size": [3, 0.4, 3] } },
+      "Base6Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-33.23, 3.2, 38.89], "Size": [3, 0.4, 3] } },
+      "Base6Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-36.06, 3.2, 36.06], "Size": [3, 0.4, 3] } },
+      "Base6Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-38.89, 3.2, 33.23], "Size": [3, 0.4, 3] } },
+      "Base7Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.35, 0.7], "Locked": true, "Position": [-48, 2.5, 0], "Size": [14, 1, 14] } },
+      "Base7Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.35, 0.7], "Locked": true, "Orientation": [0, 270, 0], "Position": [-55, 5.5, 0], "Size": [14, 7, 1] } },
+      "Base7WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.35, 0.7], "Locked": true, "Orientation": [0, 270, 0], "Position": [-48, 5.5, -7], "Size": [1, 7, 14] } },
+      "Base7WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.35, 0.7], "Locked": true, "Orientation": [0, 270, 0], "Position": [-48, 5.5, 7], "Size": [1, 7, 14] } },
+      "Base7Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-45, 3.2, 4], "Size": [3, 0.4, 3] } },
+      "Base7Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-45, 3.2, 0], "Size": [3, 0.4, 3] } },
+      "Base7Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-45, 3.2, -4], "Size": [3, 0.4, 3] } },
+      "Base7Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-51, 3.2, 4], "Size": [3, 0.4, 3] } },
+      "Base7Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-51, 3.2, 0], "Size": [3, 0.4, 3] } },
+      "Base7Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-51, 3.2, -4], "Size": [3, 0.4, 3] } },
+      "Base8Floor": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.1, 0.85, 0.9], "Locked": true, "Position": [-33.94, 2.5, -33.94], "Size": [14, 1, 14] } },
+      "Base8Back": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.1, 0.85, 0.9], "Locked": true, "Orientation": [0, 315, 0], "Position": [-38.89, 5.5, -38.89], "Size": [14, 7, 1] } },
+      "Base8WallL": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.1, 0.85, 0.9], "Locked": true, "Orientation": [0, 315, 0], "Position": [-28.99, 5.5, -38.89], "Size": [1, 7, 14] } },
+      "Base8WallR": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.1, 0.85, 0.9], "Locked": true, "Orientation": [0, 315, 0], "Position": [-38.89, 5.5, -28.99], "Size": [1, 7, 14] } },
+      "Base8Pad1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-34.65, 3.2, -28.99], "Size": [3, 0.4, 3] } },
+      "Base8Pad2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-31.82, 3.2, -31.82], "Size": [3, 0.4, 3] } },
+      "Base8Pad3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-28.99, 3.2, -34.65], "Size": [3, 0.4, 3] } },
+      "Base8Pad4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-38.89, 3.2, -33.23], "Size": [3, 0.4, 3] } },
+      "Base8Pad5": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-36.06, 3.2, -36.06], "Size": [3, 0.4, 3] } },
+      "Base8Pad6": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.95, 0.95, 0.95], "Locked": true, "Position": [-33.23, 3.2, -38.89], "Size": [3, 0.4, 3] } },
+      "Palm1Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.35, 0.2], "Locked": true, "Position": [23.73, 6, -57.28], "Size": [1.2, 8, 1.2] } },
+      "Palm1LeafA": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 0, 25], "Position": [23.73, 10.2, -57.28], "Size": [5, 0.3, 1.6] } },
+      "Palm1LeafB": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 120, 25], "Position": [23.73, 10.2, -57.28], "Size": [5, 0.3, 1.6] } },
+      "Palm1LeafC": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 240, 25], "Position": [23.73, 10.2, -57.28], "Size": [5, 0.3, 1.6] } },
+      "Palm2Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.35, 0.2], "Locked": true, "Position": [61.47, 6, -8.09], "Size": [1.2, 8, 1.2] } },
+      "Palm2LeafA": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 0, 25], "Position": [61.47, 10.2, -8.09], "Size": [5, 0.3, 1.6] } },
+      "Palm2LeafB": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 120, 25], "Position": [61.47, 10.2, -8.09], "Size": [5, 0.3, 1.6] } },
+      "Palm2LeafC": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 240, 25], "Position": [61.47, 10.2, -8.09], "Size": [5, 0.3, 1.6] } },
+      "Palm3Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.35, 0.2], "Locked": true, "Position": [37.74, 6, 49.19], "Size": [1.2, 8, 1.2] } },
+      "Palm3LeafA": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 0, 25], "Position": [37.74, 10.2, 49.19], "Size": [5, 0.3, 1.6] } },
+      "Palm3LeafB": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 120, 25], "Position": [37.74, 10.2, 49.19], "Size": [5, 0.3, 1.6] } },
+      "Palm3LeafC": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 240, 25], "Position": [37.74, 10.2, 49.19], "Size": [5, 0.3, 1.6] } },
+      "Palm4Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.35, 0.2], "Locked": true, "Position": [-23.73, 6, 57.28], "Size": [1.2, 8, 1.2] } },
+      "Palm4LeafA": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 0, 25], "Position": [-23.73, 10.2, 57.28], "Size": [5, 0.3, 1.6] } },
+      "Palm4LeafB": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 120, 25], "Position": [-23.73, 10.2, 57.28], "Size": [5, 0.3, 1.6] } },
+      "Palm4LeafC": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 240, 25], "Position": [-23.73, 10.2, 57.28], "Size": [5, 0.3, 1.6] } },
+      "Palm5Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.35, 0.2], "Locked": true, "Position": [-61.47, 6, 8.09], "Size": [1.2, 8, 1.2] } },
+      "Palm5LeafA": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 0, 25], "Position": [-61.47, 10.2, 8.09], "Size": [5, 0.3, 1.6] } },
+      "Palm5LeafB": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 120, 25], "Position": [-61.47, 10.2, 8.09], "Size": [5, 0.3, 1.6] } },
+      "Palm5LeafC": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 240, 25], "Position": [-61.47, 10.2, 8.09], "Size": [5, 0.3, 1.6] } },
+      "Palm6Trunk": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.55, 0.35, 0.2], "Locked": true, "Position": [-37.74, 6, -49.19], "Size": [1.2, 8, 1.2] } },
+      "Palm6LeafA": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 0, 25], "Position": [-37.74, 10.2, -49.19], "Size": [5, 0.3, 1.6] } },
+      "Palm6LeafB": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 120, 25], "Position": [-37.74, 10.2, -49.19], "Size": [5, 0.3, 1.6] } },
+      "Palm6LeafC": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.15, 0.7, 0.2], "Locked": true, "Orientation": [0, 240, 25], "Position": [-37.74, 10.2, -49.19], "Size": [5, 0.3, 1.6] } },
+      "Rock1": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Locked": true, "Position": [20, 3, 20], "Shape": "Ball", "Size": [4, 4, 4] } },
+      "Rock2": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Locked": true, "Position": [-25, 3, 15], "Shape": "Ball", "Size": [4, 4, 4] } },
+      "Rock3": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Locked": true, "Position": [28, 3, -20], "Shape": "Ball", "Size": [4, 4, 4] } },
+      "Rock4": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.5, 0.5, 0.5], "Locked": true, "Position": [-18, 3, -28], "Shape": "Ball", "Size": [4, 4, 4] } },
+      "Lamp1Post": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.25, 0.25], "Locked": true, "Position": [12, 4.5, 12], "Size": [0.6, 5, 0.6] } },
+      "Lamp1Head": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.9, 0.3], "Locked": true, "Material": "Neon", "Position": [12, 7.2, 12], "Size": [2, 1, 2] } },
+      "Lamp2Post": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.25, 0.25], "Locked": true, "Position": [-12, 4.5, 12], "Size": [0.6, 5, 0.6] } },
+      "Lamp2Head": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.9, 0.3], "Locked": true, "Material": "Neon", "Position": [-12, 7.2, 12], "Size": [2, 1, 2] } },
+      "Lamp3Post": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.25, 0.25], "Locked": true, "Position": [12, 4.5, -12], "Size": [0.6, 5, 0.6] } },
+      "Lamp3Head": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.9, 0.3], "Locked": true, "Material": "Neon", "Position": [12, 7.2, -12], "Size": [2, 1, 2] } },
+      "Lamp4Post": { "$className": "Part", "$properties": { "Anchored": true, "Color": [0.25, 0.25, 0.25], "Locked": true, "Position": [-12, 4.5, -12], "Size": [0.6, 5, 0.6] } },
+      "Lamp4Head": { "$className": "Part", "$properties": { "Anchored": true, "Color": [1, 0.9, 0.3], "Locked": true, "Material": "Neon", "Position": [-12, 7.2, -12], "Size": [2, 1, 2] } }
+    },
+    "Lighting": { "$properties": { "Ambient": [0, 0, 0], "Brightness": 2, "ClockTime": 14, "GlobalShadows": true, "Outlines": false, "Technology": "Voxel" } },
+    "SoundService": { "$properties": { "RespectFilteringEnabled": true } }
   }
 }

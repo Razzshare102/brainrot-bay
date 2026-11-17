@@ -1,115 +1,73 @@
--- Brainrot Bay — the tsunami. Every three minutes the island gets a warning,
--- then a great wave sweeps across it from the sea: it knocks players off
--- their feet, makes thieves drop what they carry, and washes every brainrot
--- off the belt. Players who stand on their own base ride it out safely.
+-- Brainrot Bay: the tsunami. Every three minutes the sea comes for the
+-- island: ten seconds of warning, then a wall of water sweeps from north
+-- to south, flinging players and dropping whatever they are carrying.
 
-local BrainrotData = require(game:GetService("ReplicatedStorage"):WaitForChild("Shared"):WaitForChild("BrainrotData"))
+local GameConfig = require(game:GetService("ReplicatedStorage").Shared.GameConfig)
+local Steal = require(script.Parent.Steal)
 
 local Tsunami = {}
 
-local Workspace = game:GetService("Workspace")
+local nextWaveAt = 0
+local warning = false
 
-local wavePart = nil
-local towerLight = nil
-local state = "calm" -- calm | warning | wave
-local clock = 0
-local waveClock = 0
-local onWave = nil -- (phase) -> nil; the server wires this to the client warning RemoteEvent
-
-local WAVE_TRAVEL = 12 -- seconds for the wave to cross the island
-local ISLAND_SPAN = 220 -- studs across, a little wider than the island
-
-function Tsunami.init(wave, light, callback)
-	wavePart = wave
-	towerLight = light
-	onWave = callback
-end
-
-function Tsunami.secondsUntilNext()
-	if state == "calm" then
-		return BrainrotData.TUNING.TsunamiEvery - clock
-	elseif state == "warning" then
-		return 0
-	else
-		return BrainrotData.TUNING.TsunamiEvery
-	end
+function Tsunami.secondsUntilWave()
+	return math.max(0, nextWaveAt - os.clock())
 end
 
 function Tsunami.isWarning()
-	return state == "warning"
+	return warning
 end
 
-function Tsunami.phase()
-	return state
-end
-
-local function startWarning()
-	state = "warning"
-	waveClock = 0
-	if towerLight then
-		towerLight.Color = Color3.fromRGB(255, 40, 40)
-		towerLight.Material = Enum.Material.Neon
-	end
-	if onWave then
-		onWave("warning")
-	end
-end
-
-local function startWave()
-	state = "wave"
-	waveClock = 0
-	if wavePart then
-		wavePart.Transparency = 0.25
-		wavePart.CFrame = CFrame.new(-ISLAND_SPAN / 2, 6, 0)
-	end
-	if onWave then
-		onWave("wave")
+local function flingPlayers(waveZ)
+	for _, player in ipairs(game:GetService("Players"):GetPlayers()) do
+		local character = player.Character
+		local root = character and character:FindFirstChild("HumanoidRootPart")
+		if root then
+			local pos = root.Position
+			if math.abs(pos.X) < 85 and math.abs(pos.Z - waveZ) < 15 then
+				root.AssemblyLinearVelocity = Vector3.new(0, 30, GameConfig.TSUNAMI_FLING)
+				Steal.dropCarry(player)
+			end
+		end
 	end
 end
 
-local function endWave()
-	state = "calm"
-	clock = 0
-	if wavePart then
-		wavePart.Transparency = 1
+local function runWave()
+	warning = false
+	local wave = Instance.new("Part")
+	wave.Name = "TsunamiWave"
+	wave.Size = Vector3.new(170, 14, 26)
+	wave.Color = Color3.fromRGB(30, 120, 220)
+	wave.Material = Enum.Material.SmoothPlastic
+	wave.Transparency = 0.15
+	wave.Anchored = true
+	wave.CanCollide = false
+	wave.Parent = workspace
+	local z = -80
+	while z < 80 do
+		z += 4
+		wave.CFrame = CFrame.new(0, 9, z)
+		flingPlayers(z)
+		task.wait(0.12)
 	end
-	if towerLight then
-		towerLight.Color = Color3.fromRGB(80, 255, 120)
-		towerLight.Material = Enum.Material.SmoothPlastic
-	end
-	if onWave then
-		onWave("calm")
-	end
+	wave:Destroy()
 end
 
--- Step the tsunami clock. `sweep` is a callback the server passes that
--- knocks a player and drops what they carry; it is called once per player
--- the wave reaches.
-function Tsunami.step(dt, sweep)
-	if state == "calm" then
-		clock += dt
-		if clock >= BrainrotData.TUNING.TsunamiEvery then
-			startWarning()
+function Tsunami.init()
+	nextWaveAt = os.clock() + GameConfig.TSUNAMI_PERIOD_SECONDS
+	task.spawn(function()
+		while true do
+			task.wait(1)
+			local now = os.clock()
+			local left = nextWaveAt - now
+			if left <= GameConfig.TSUNAMI_WARNING_SECONDS and left > 0 then
+				warning = true
+			elseif left <= 0 then
+				runWave()
+				nextWaveAt = os.clock() + GameConfig.TSUNAMI_PERIOD_SECONDS
+			end
 		end
-	elseif state == "warning" then
-		waveClock += dt
-		if waveClock >= BrainrotData.TUNING.TsunamiWarn then
-			startWave()
-		end
-	elseif state == "wave" then
-		waveClock += dt
-		local progress = math.clamp(waveClock / WAVE_TRAVEL, 0, 1)
-		local x = -ISLAND_SPAN / 2 + progress * ISLAND_SPAN
-		if wavePart then
-			wavePart.CFrame = CFrame.new(x, 6, 0)
-		end
-		if sweep then
-			sweep(x)
-		end
-		if progress >= 1 then
-			endWave()
-		end
-	end
+	end)
 end
 
 return Tsunami

@@ -1,291 +1,201 @@
--- Brainrot Bay — the HUD. It builds the whole ScreenGui: the money counter
--- up top, the tsunami timer, the action buttons along the bottom, the shop
--- window, and the notification line. It draws nothing in the top-left corner,
+-- Brainrot Bay: the whole interface, built in code. Money top-right, the
+-- wave clock top-centre, your base on the left, the shop on the right, and
+-- the three actions along the bottom. Nothing sits in the top-left corner,
 -- where Roblox puts its own menu buttons.
 
-local BrainrotData = require(game:GetService("ReplicatedStorage"):WaitForChild("Shared"):WaitForChild("BrainrotData"))
+local GameConfig = require(game:GetService("ReplicatedStorage").Shared.GameConfig)
 
 local HUD = {}
 
-local player = game:GetService("Players").LocalPlayer
+local DARK = Color3.fromRGB(20, 24, 40)
+local PANEL = Color3.fromRGB(28, 32, 54)
+local GREEN = Color3.fromRGB(70, 220, 110)
+local GOLD = Color3.fromRGB(255, 205, 60)
+local RED = Color3.fromRGB(235, 70, 70)
+local WHITE = Color3.fromRGB(245, 245, 245)
 
-local gui = nil
-local moneyLabel = nil
-local rebirthLabel = nil
-local timerLabel = nil
-local warnBanner = nil
-local noticeLabel = nil
-local noticeClock = 0
-local shopFrame = nil
-local shopList = nil
-local carryLabel = nil
-
-local onShopBuy = nil -- (itemId) -> nil; the client wires this to the shop RemoteEvent
-local onRebirth = nil -- () -> nil
-local onLock = nil -- () -> nil
-local onBuyOrSteal = nil -- () -> nil; fires the E action
-local onSlap = nil -- () -> nil; fires the Q action
-
-local function makeButton(name, text, position, size, parent)
-	local button = Instance.new("TextButton")
-	button.Name = name
-	button.Text = text
-	button.Position = position
-	button.Size = size
-	button.BackgroundColor3 = Color3.fromRGB(40, 60, 90)
-	button.BackgroundTransparency = 0.15
-	button.BorderColor3 = Color3.fromRGB(255, 255, 255)
-	button.BorderSizePixel = 1
-	button.TextColor3 = Color3.fromRGB(255, 255, 255)
-	button.TextScaled = true
-	button.Font = Enum.Font.GothamBold
-	button.Parent = parent
-	return button
+local function commas(n)
+	local text = tostring(math.floor(n))
+	local out = ""
+	while #text > 3 do
+		out = "," .. string.sub(text, -3) .. out
+		text = string.sub(text, 1, -4)
+	end
+	return text .. out
 end
 
-local function makeLabel(name, text, position, size, parent, colour, textSize)
+local function makeLabel(parent, name, text, position, size, textSize, color)
 	local label = Instance.new("TextLabel")
 	label.Name = name
-	label.Text = text
 	label.Position = position
 	label.Size = size
 	label.BackgroundTransparency = 1
-	label.TextColor3 = colour or Color3.fromRGB(255, 255, 255)
-	label.TextStrokeTransparency = 0.1
-	label.TextScaled = textSize == nil
-	if textSize then
-		label.TextSize = textSize
-	end
+	label.Text = text
+	label.TextColor3 = color or WHITE
+	label.TextSize = textSize
 	label.Font = Enum.Font.GothamBold
+	label.TextXAlignment = Enum.TextXAlignment.Left
 	label.Parent = parent
 	return label
 end
 
-function HUD.init(callbacks)
-	onShopBuy = callbacks.shopBuy
-	onRebirth = callbacks.rebirth
-	onLock = callbacks.lock
-	onBuyOrSteal = callbacks.buyOrSteal
-	onSlap = callbacks.slap
+local function makeButton(parent, name, text, position, size, color)
+	local button = Instance.new("TextButton")
+	button.Name = name
+	button.Position = position
+	button.Size = size
+	button.BackgroundColor3 = color or PANEL
+	button.BorderSizePixel = 0
+	button.Text = text
+	button.TextColor3 = WHITE
+	button.TextSize = 20
+	button.Font = Enum.Font.GothamBold
+	button.Parent = parent
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 8)
+	corner.Parent = button
+	return button
+end
 
-	gui = Instance.new("ScreenGui")
+local function makePanel(parent, name, position, size)
+	local frame = Instance.new("Frame")
+	frame.Name = name
+	frame.Position = position
+	frame.Size = size
+	frame.BackgroundColor3 = DARK
+	frame.BackgroundTransparency = 0.25
+	frame.BorderSizePixel = 0
+	frame.Parent = parent
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 10)
+	corner.Parent = frame
+	return frame
+end
+
+-- Build the interface. callbacks: buy, slap, lock, shop(itemId), rebirth.
+function HUD.build(callbacks)
+	local player = game:GetService("Players").LocalPlayer
+	local gui = Instance.new("ScreenGui")
 	gui.Name = "BrainrotBayGui"
 	gui.ResetOnSpawn = false
 	gui.IgnoreGuiInset = true
-
-	-- Money, top centre: the number the player watches most.
-	moneyLabel = makeLabel("MoneyLabel", "$100", UDim2.new(0.5, -110, 0, 8), UDim2.fromOffset(220, 44), gui, Color3.fromRGB(255, 220, 80), 30)
-	rebirthLabel = makeLabel("RebirthLabel", "Rebirth 0  |  x1.00", UDim2.new(0.5, -110, 0, 52), UDim2.fromOffset(220, 22), gui, Color3.fromRGB(255, 255, 255), 16)
-
-	-- Tsunami timer, top right.
-	timerLabel = makeLabel("TimerLabel", "Tsunami in 3:00", UDim2.new(1, -210, 0, 10), UDim2.fromOffset(200, 30), gui, Color3.fromRGB(120, 220, 255), 20)
-	timerLabel.TextXAlignment = Enum.TextXAlignment.Right
-
-	-- The tsunami warning banner, centre top, hidden until the wave comes.
-	warnBanner = makeLabel("WarnBanner", "TSUNAMI INCOMING — GET TO YOUR BASE!", UDim2.new(0.5, -260, 0, 90), UDim2.fromOffset(520, 44), gui, Color3.fromRGB(255, 70, 70), 26)
-	warnBanner.Visible = false
-
-	-- The notification line, under the money counter.
-	noticeLabel = makeLabel("NoticeLabel", "", UDim2.new(0.5, -300, 0, 82), UDim2.fromOffset(600, 26), gui, Color3.fromRGB(255, 255, 255), 18)
-	noticeLabel.Visible = false
-
-	-- Carrying indicator, above the bottom buttons.
-	carryLabel = makeLabel("CarryLabel", "CARRYING A BRAINROT — RUN HOME!", UDim2.new(0.5, -220, 1, -150), UDim2.fromOffset(440, 30), gui, Color3.fromRGB(255, 180, 60), 20)
-	carryLabel.Visible = false
-
-	-- Bottom buttons: buy/steal, slap, lock, shop, rebirth.
-	local bar = Instance.new("Frame")
-	bar.Name = "ActionBar"
-	bar.AnchorPoint = Vector2.new(0.5, 1)
-	bar.Position = UDim2.new(0.5, 0, 1, -12)
-	bar.Size = UDim2.fromOffset(620, 56)
-	bar.BackgroundTransparency = 1
-	bar.Parent = gui
-
-	local buyButton = makeButton("BuyButton", "BUY / STEAL  [E]", UDim2.fromOffset(0, 0), UDim2.fromOffset(140, 56), bar)
-	buyButton.MouseButton1Click:Connect(function()
-		if onBuyOrSteal then
-			onBuyOrSteal()
-		end
-		HUD.flashButton(buyButton)
-	end)
-
-	local slapButton = makeButton("SlapButton", "SLAP  [Q]", UDim2.fromOffset(150, 0), UDim2.fromOffset(110, 56), bar)
-	slapButton.MouseButton1Click:Connect(function()
-		if onSlap then
-			onSlap()
-		end
-		HUD.flashButton(slapButton)
-	end)
-
-	local lockButton = makeButton("LockButton", "LOCK BASE  [F]", UDim2.fromOffset(270, 0), UDim2.fromOffset(130, 56), bar)
-	lockButton.MouseButton1Click:Connect(function()
-		if onLock then
-			onLock()
-		end
-		HUD.flashButton(lockButton)
-	end)
-
-	local shopButton = makeButton("ShopButton", "SHOP", UDim2.fromOffset(410, 0), UDim2.fromOffset(90, 56), bar)
-	shopButton.MouseButton1Click:Connect(function()
-		HUD.toggleShop()
-		HUD.flashButton(shopButton)
-	end)
-
-	local rebirthButton = makeButton("RebirthButton", "REBIRTH", UDim2.fromOffset(510, 0), UDim2.fromOffset(110, 56), bar)
-	rebirthButton.BackgroundColor3 = Color3.fromRGB(120, 40, 120)
-	rebirthButton.MouseButton1Click:Connect(function()
-		if onRebirth then
-			onRebirth()
-		end
-		HUD.flashButton(rebirthButton)
-	end)
-
-	-- The shop window, centre screen, hidden until opened.
-	shopFrame = Instance.new("Frame")
-	shopFrame.Name = "ShopFrame"
-	shopFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	shopFrame.Position = UDim2.fromScale(0.5, 0.5)
-	shopFrame.Size = UDim2.fromOffset(460, 360)
-	shopFrame.BackgroundColor3 = Color3.fromRGB(25, 35, 55)
-	shopFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
-	shopFrame.BorderSizePixel = 2
-	shopFrame.Visible = false
-	shopFrame.Parent = gui
-
-	local shopTitle = makeLabel("ShopTitle", "SHOP — spend what your brainrots earn", UDim2.new(0, 0, 0, 6), UDim2.new(1, 0, 0, 30), shopFrame, Color3.fromRGB(255, 220, 80), 20)
-	shopTitle.TextScaled = false
-
-	shopList = Instance.new("Frame")
-	shopList.Name = "ShopList"
-	shopList.Position = UDim2.new(0, 10, 0, 44)
-	shopList.Size = UDim2.new(1, -20, 1, -100)
-	shopList.BackgroundTransparency = 1
-	shopList.Parent = shopFrame
-
-	local closeButton = makeButton("CloseButton", "CLOSE", UDim2.new(0.5, -60, 1, -52), UDim2.fromOffset(120, 40), shopFrame)
-	closeButton.MouseButton1Click:Connect(function()
-		shopFrame.Visible = false
-	end)
-
 	gui.Parent = player:WaitForChild("PlayerGui")
+
+	local api = { rows = {}, shopRows = {} }
+
+	local money = makePanel(gui, "MoneyPanel", UDim2.new(1, -276, 0, 16), UDim2.fromOffset(260, 100))
+	api.cashLabel = makeLabel(money, "Cash", "$100", UDim2.fromOffset(14, 8), UDim2.fromOffset(232, 36), 30, GOLD)
+	api.incomeLabel = makeLabel(money, "Income", "+$0 /s", UDim2.fromOffset(14, 46), UDim2.fromOffset(232, 24), 18, GREEN)
+	api.rebirthLabel = makeLabel(money, "Rebirths", "Rebirths: 0", UDim2.fromOffset(14, 70), UDim2.fromOffset(232, 22), 16, WHITE)
+
+	api.waveLabel = makeLabel(gui, "WaveClock", "Next tsunami: 3:00", UDim2.new(0.5, -150, 0, 16), UDim2.fromOffset(300, 34), 22, Color3.fromRGB(140, 210, 255))
+	api.waveLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+	api.alertLabel = makeLabel(gui, "Alert", "TSUNAMI WARNING - GET TO HIGH GROUND!", UDim2.new(0.5, -240, 0, 56), UDim2.fromOffset(480, 40), 24, RED)
+	api.alertLabel.TextXAlignment = Enum.TextXAlignment.Center
+	api.alertLabel.Visible = false
+
+	api.carryLabel = makeLabel(gui, "Carrying", "", UDim2.new(0.5, -210, 0.32, 0), UDim2.fromOffset(420, 40), 22, GOLD)
+	api.carryLabel.TextXAlignment = Enum.TextXAlignment.Center
+	api.carryLabel.Visible = false
+
+	api.toastLabel = makeLabel(gui, "Toast", "", UDim2.new(0.5, -240, 0.42, 0), UDim2.fromOffset(480, 36), 20, WHITE)
+	api.toastLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+	local base = makePanel(gui, "BasePanel", UDim2.new(0, 16, 0.5, -130), UDim2.fromOffset(250, 260))
+	api.baseTitle = makeLabel(base, "Title", "MY BASE - 0/6", UDim2.fromOffset(12, 8), UDim2.fromOffset(226, 26), 18, GOLD)
+	for i = 1, 8 do
+		local row = makeLabel(base, "Row" .. tostring(i), "", UDim2.fromOffset(12, 38 + (i - 1) * 26), UDim2.fromOffset(226, 24), 15, WHITE)
+		api.rows[i] = row
+	end
+
+	api.shopToggle = makeButton(gui, "ShopToggle", "SHOP", UDim2.new(1, -176, 0, 124), UDim2.fromOffset(160, 44), PANEL)
+	local shop = makePanel(gui, "ShopPanel", UDim2.new(1, -296, 0.5, -160), UDim2.fromOffset(280, 320))
+	shop.Visible = false
+	api.shopPanel = shop
+	makeLabel(shop, "Title", "SHOP", UDim2.fromOffset(12, 8), UDim2.fromOffset(256, 26), 18, GOLD)
+	for i, item in ipairs(GameConfig.SHOP) do
+		local y = 40 + (i - 1) * 54
+		makeLabel(shop, "Name" .. tostring(i), item.name, UDim2.fromOffset(12, y), UDim2.fromOffset(170, 24), 16, WHITE)
+		makeLabel(shop, "Desc" .. tostring(i), item.desc, UDim2.fromOffset(12, y + 24), UDim2.fromOffset(170, 22), 14, Color3.fromRGB(180, 180, 180))
+		local buyButton = makeButton(shop, "Buy" .. tostring(i), "$" .. commas(item.price), UDim2.fromOffset(190, y + 6), UDim2.fromOffset(78, 38), GREEN)
+		buyButton.TextColor3 = Color3.fromRGB(15, 30, 15)
+		buyButton.MouseButton1Click:Connect(function()
+			callbacks.shop(item.id)
+		end)
+		api.shopRows[item.id] = buyButton
+	end
+	api.shopToggle.MouseButton1Click:Connect(function()
+		shop.Visible = not shop.Visible
+	end)
+
+	api.contextLabel = makeLabel(gui, "Context", "Waiting for the belt...", UDim2.new(0.5, -230, 1, -118), UDim2.fromOffset(460, 28), 18, WHITE)
+	api.contextLabel.TextXAlignment = Enum.TextXAlignment.Center
+
+	local actions = makePanel(gui, "Actions", UDim2.new(0.5, -230, 1, -86), UDim2.fromOffset(460, 70))
+	api.buyButton = makeButton(actions, "Buy", "BUY  [E]", UDim2.fromOffset(10, 10), UDim2.fromOffset(140, 50), GREEN)
+	api.buyButton.TextColor3 = Color3.fromRGB(15, 30, 15)
+	api.slapButton = makeButton(actions, "Slap", "SLAP  [Q]", UDim2.fromOffset(160, 10), UDim2.fromOffset(140, 50), Color3.fromRGB(230, 120, 40))
+	api.lockButton = makeButton(actions, "Lock", "LOCK  [F]", UDim2.fromOffset(310, 10), UDim2.fromOffset(140, 50), Color3.fromRGB(90, 140, 255))
+	api.buyButton.MouseButton1Click:Connect(callbacks.buy)
+	api.slapButton.MouseButton1Click:Connect(callbacks.slap)
+	api.lockButton.MouseButton1Click:Connect(callbacks.lock)
+
+	api.rebirthButton = makeButton(gui, "Rebirth", "REBIRTH - $25,000 (+25%)", UDim2.new(1, -236, 1, -66), UDim2.fromOffset(220, 50), Color3.fromRGB(150, 70, 220))
+	api.rebirthButton.MouseButton1Click:Connect(callbacks.rebirth)
+
+	return api
 end
 
-function HUD.flashButton(button)
-	button.BackgroundColor3 = Color3.fromRGB(255, 220, 80)
-	task.delay(0.15, function()
-		if button.Name == "RebirthButton" then
-			button.BackgroundColor3 = Color3.fromRGB(120, 40, 120)
+function HUD.update(api, state)
+	api.cashLabel.Text = "$" .. commas(state.cash)
+	api.incomeLabel.Text = "+$" .. commas(state.income) .. " /s"
+	api.rebirthLabel.Text = "Rebirths: " .. tostring(state.rebirths) .. "  (+" .. tostring(math.floor(state.rebirths * 25 + 0.5)) .. "%)"
+	local minutes = math.floor(state.tsunamiIn / 60)
+	local seconds = state.tsunamiIn % 60
+	if state.tsunamiWarning then
+		api.waveLabel.Text = "TSUNAMI INCOMING!"
+	else
+		api.waveLabel.Text = "Next tsunami: " .. tostring(minutes) .. ":" .. string.format("%02d", seconds)
+	end
+	api.alertLabel.Visible = state.tsunamiWarning
+	if state.carrying then
+		api.carryLabel.Visible = true
+		api.carryLabel.Text = "CARRYING: " .. state.carrying.name .. " - get home! " .. tostring(state.carrying.secondsLeft) .. "s"
+	else
+		api.carryLabel.Visible = false
+	end
+	api.baseTitle.Text = "MY BASE - " .. tostring(state.slotsUsed) .. "/" .. tostring(state.slotsTotal)
+	for i = 1, 8 do
+		local entry = state.owned[i]
+		if entry then
+			api.rows[i].Text = entry.name .. " (" .. entry.rarity .. " " .. entry.mutation .. ") - $" .. commas(entry.rate) .. "/s"
 		else
-			button.BackgroundColor3 = Color3.fromRGB(40, 60, 90)
+			api.rows[i].Text = ""
+		end
+	end
+	for id, button in pairs(api.shopRows) do
+		local count = (state.shopOwned and state.shopOwned[id]) or 0
+		if id == "slot" then
+			button.Text = count >= 2 and "OWNED x2" or "$2,000"
+		else
+			button.Text = count >= 1 and "OWNED" or button.Text
+		end
+	end
+	if state.lockLeft > 0 then
+		api.lockButton.Text = "LOCKED " .. tostring(math.ceil(state.lockLeft)) .. "s"
+	else
+		api.lockButton.Text = "LOCK  [F]"
+	end
+end
+
+function HUD.toast(api, text)
+	api.toastLabel.Text = text
+	task.delay(3, function()
+		if api.toastLabel.Text == text then
+			api.toastLabel.Text = ""
 		end
 	end)
-end
-
-function HUD.setMoney(amount, rebirthCount)
-	if moneyLabel then
-		moneyLabel.Text = "$" .. tostring(math.floor(amount + 0.5))
-	end
-	if rebirthLabel then
-		local mult = BrainrotData.rebirthMult(rebirthCount)
-		rebirthLabel.Text = "Rebirth " .. tostring(rebirthCount) .. "  |  x" .. string.format("%.2f", mult)
-	end
-end
-
-function HUD.setTimer(seconds, warning)
-	if timerLabel then
-		if warning then
-			timerLabel.Text = "TSUNAMI NOW!"
-			timerLabel.TextColor3 = Color3.fromRGB(255, 70, 70)
-		else
-			local mins = math.floor(seconds / 60)
-			local secs = math.floor(seconds % 60)
-			timerLabel.Text = "Tsunami in " .. tostring(mins) .. ":" .. string.format("%02d", secs)
-			timerLabel.TextColor3 = Color3.fromRGB(120, 220, 255)
-		end
-	end
-end
-
-function HUD.showWarning(show)
-	if warnBanner then
-		warnBanner.Visible = show
-	end
-end
-
-function HUD.showCarrying(show)
-	if carryLabel then
-		carryLabel.Visible = show
-	end
-end
-
-function HUD.notify(text)
-	if not noticeLabel then
-		return
-	end
-	noticeLabel.Text = text
-	noticeLabel.Visible = true
-	noticeClock = 4
-end
-
--- Called every frame by the client: fades the notification line away.
-function HUD.step(dt)
-	if noticeLabel and noticeLabel.Visible then
-		noticeClock -= dt
-		if noticeClock <= 0 then
-			noticeLabel.Visible = false
-		end
-	end
-end
-
-function HUD.toggleShop()
-	if shopFrame then
-		shopFrame.Visible = not shopFrame.Visible
-	end
-end
-
-function HUD.isShopOpen()
-	return shopFrame and shopFrame.Visible
-end
-
--- Draw the shop's rows from the server's state: name, level and next cost.
-function HUD.drawShop(state)
-	if not shopList then
-		return
-	end
-	for _, child in ipairs(shopList:GetChildren()) do
-		child:Destroy()
-	end
-	local y = 0
-	for _, item in ipairs(state) do
-		local row = Instance.new("Frame")
-		row.Name = "ShopRow_" .. item.Id
-		row.Position = UDim2.fromOffset(0, y)
-		row.Size = UDim2.new(1, 0, 0, 44)
-		row.BackgroundColor3 = Color3.fromRGB(40, 55, 85)
-		row.BorderSizePixel = 0
-		row.Parent = shopList
-
-		local nameLabel = makeLabel("ItemName", item.Name .. "  (" .. tostring(item.Level) .. "/" .. tostring(item.MaxLevel) .. ")", UDim2.fromOffset(8, 2), UDim2.new(0.6, -8, 0, 22), row, Color3.fromRGB(255, 255, 255), 16)
-		nameLabel.TextXAlignment = Enum.TextXAlignment.Left
-		nameLabel.TextScaled = false
-
-		local descLabel = makeLabel("ItemDesc", item.Desc, UDim2.fromOffset(8, 24), UDim2.new(0.6, -8, 0, 18), row, Color3.fromRGB(180, 200, 220), 13)
-		descLabel.TextXAlignment = Enum.TextXAlignment.Left
-		descLabel.TextScaled = false
-
-		if item.Cost then
-			local buy = makeButton("Buy_" .. item.Id, "$" .. tostring(item.Cost), UDim2.new(1, -108, 0, 4), UDim2.fromOffset(100, 36), row)
-			buy.BackgroundColor3 = Color3.fromRGB(40, 140, 60)
-			buy.MouseButton1Click:Connect(function()
-				if onShopBuy then
-					onShopBuy(item.Id)
-				end
-			end)
-		else
-			makeLabel("MaxedLabel", "MAXED", UDim2.new(1, -108, 0, 4), UDim2.fromOffset(100, 36), row, Color3.fromRGB(255, 220, 80), 16)
-		end
-		y += 50
-	end
 end
 
 return HUD
