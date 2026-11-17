@@ -1,0 +1,1 @@
+{"steps":[{"screenshot":"01-cover.png"},{"keys":["E"],"screenshot":"02-buy-off-the-belt.png","wait_ms":1000},{"keys":["E"],"screenshot":"03-steal-and-run-home.png","wait_ms":2000},{"keys":[],"screenshot":"04-tsunami-warning.png","wait_ms":1000}],"tour":1}
